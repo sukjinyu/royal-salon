@@ -61,11 +61,19 @@ npm run build
 
 ## 6. Cloudflare Pages에 배포하기
 
+GitHub 저장소를 Cloudflare Pages에 연결했다면 Cloudflare 대시보드에서 다음처럼 설정합니다.
+
+- Build command: `pnpm run build`
+- Build output directory: `dist`
+- Deploy command: 비워 두기
+
+Pages는 빌드가 끝난 뒤 `dist/`를 자동으로 배포합니다. GitHub에 새 커밋을 올리면 자동으로 다시 배포됩니다.
+
+터미널에서 수동 배포할 때만 아래 명령을 사용합니다. `royal-salon` 부분은 Cloudflare Pages에 표시되는 실제 프로젝트 이름으로 바꾸세요.
+
 ```powershell
 npx wrangler pages deploy dist --project-name royal-salon
 ```
-
-질문이 나오면 무료 Pages 프로젝트로 생성하면 됩니다. 완료되면 `https://royal-salon.pages.dev` 같은 주소가 표시됩니다.
 
 ## 7. 배포 후 확인하기
 
@@ -77,6 +85,26 @@ npx wrangler pages deploy dist --project-name royal-salon
 4. 상점에서 구매한 장식이 저장되는지 확인합니다.
 
 ## 자주 막히는 부분
+
+### `Missing entry-point to Worker script or to assets directory` 오류가 나요
+
+Cloudflare가 Pages 배포 명령이 아니라 Workers 배포 명령을 실행한 상황입니다.
+
+Cloudflare Pages 배포 설정에서 Deploy command가 아래처럼 되어 있으면 실패합니다.
+
+```powershell
+npx wrangler deploy
+```
+
+GitHub 자동 배포를 계속 사용할 경우에는 Deploy command를 통째로 지우는 것이 가장 간단합니다.
+
+수동 배포 명령을 입력해야 하는 화면이라면 아래처럼 `pages`를 포함한 명령으로 바꾸세요.
+
+```powershell
+npx wrangler pages deploy dist --project-name royal-salon
+```
+
+Cloudflare Pages 화면에서 프로젝트 이름이 `ssalon1`처럼 다르게 보이면 마지막 이름만 실제 프로젝트 이름으로 바꾸면 됩니다. GitHub 저장소 이름과 Pages 프로젝트 이름은 서로 다를 수 있습니다.
 
 ### `database_id` 오류가 나요
 

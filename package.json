@@ -12,9 +12,9 @@
     "start": "node server/index.ts --production",
     "test": "node --test tests/*.test.ts",
     "cloudflare:build": "npm run build",
-    "cloudflare:d1:create": "wrangler d1 create royal-salon-db",
-    "cloudflare:d1:schema": "wrangler d1 execute royal-salon-db --remote --file migrations/0001_player_saves.sql",
-    "cloudflare:deploy": "npm run build && wrangler pages deploy dist --project-name royal-salon"
+    "cloudflare:d1:create": "npx wrangler d1 create royal-salon-db",
+    "cloudflare:d1:schema": "npx wrangler d1 execute royal-salon-db --remote --file migrations/0001_player_saves.sql",
+    "cloudflare:deploy": "npm run build && npx wrangler pages deploy dist --project-name royal-salon"
   },
   "dependencies": {
     "express": "^5.1.0",
